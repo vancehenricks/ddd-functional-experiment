@@ -9,7 +9,9 @@
     "build": "tsc",
     "start:dist": "node dist/src/index.js",
     "db:start": "docker compose up -d",
-    "db:stop": "docker compose down",
+    "db:destroy": "docker compose down",
+    "db:stop": "docker compose stop",
+    "db:seed": "cat seed.sql | docker exec -i postgres psql -h localhost -U postgres -f-",
     "lint": "eslint --fix src test",
     "test": "jest",
     "typecheck": "tsc --noEmit"
