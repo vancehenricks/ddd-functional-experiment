@@ -8,6 +8,8 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "start:dist": "node dist/src/index.js",
+    "db:start": "docker compose up -d",
+    "db:stop": "docker compose down",
     "lint": "eslint --fix src test",
     "test": "jest",
     "typecheck": "tsc --noEmit"
