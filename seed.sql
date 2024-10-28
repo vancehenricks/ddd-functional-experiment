@@ -9,43 +9,61 @@ CREATE TABLE users (
     display_name VARCHAR(50) UNIQUE NOT NULL,
     description VARCHAR(200) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    PRIMARY KEY(user_id)
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE posts (
     post_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT,
     message VARCHAR(500) NOT NULL,
-    PRIMARY KEY(post_id),
+    PRIMARY KEY (post_id),
     CONSTRAINT fk_users
-      FOREIGN KEY(user_id)
-  	  REFERENCES users(user_id)
-  	  ON DELETE CASCADE
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE likes (
-  like_id INT GENERATED ALWAYS AS IDENTITY,
-  post_id INT,
-  user_id INT,
-  PRIMARY KEY (like_id),
-  CONSTRAINT fk_post
-    FOREIGN KEY(post_id)
-    REFERENCES posts(post_id)
+    like_id INT GENERATED ALWAYS AS IDENTITY,
+    post_id INT,
+    user_id INT,
+    PRIMARY KEY (like_id),
+    CONSTRAINT fk_post
+    FOREIGN KEY (post_id)
+    REFERENCES posts (post_id)
     ON DELETE CASCADE,
-  CONSTRAINT fk_users
-    FOREIGN KEY(user_id)
-	REFERENCES users(user_id)
-	ON DELETE CASCADE
+    CONSTRAINT fk_users
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE CASCADE
 );
 
 
 -- Insert dummy data into the users table
 INSERT INTO users (username, password, display_name, description, email) VALUES
-('johndoe', 'password123', 'John Doe', 'Software developer', 'johndoe@example.com'),
-('janedoe', 'password456', 'Jane Doe', 'Graphic designer', 'janedoe@example.com'),
+(
+    'johndoe',
+    'password123',
+    'John Doe',
+    'Software developer',
+    'johndoe@example.com'
+),
+(
+    'janedoe',
+    'password456',
+    'Jane Doe',
+    'Graphic designer',
+    'janedoe@example.com'
+),
 ('alice', 'password789', 'Alice Smith', 'Content writer', 'alice@example.com'),
 ('bob', 'password000', 'Bob Brown', 'Marketing specialist', 'bob@example.com'),
-('charlie', 'password111', 'Charlie Black', 'Project manager', 'charlie@example.com');
+(
+    'charlie',
+    'password111',
+    'Charlie Black',
+    'Project manager',
+    'charlie@example.com'
+);
 
 -- Insert dummy data into the posts table
 INSERT INTO posts (user_id, message) VALUES
