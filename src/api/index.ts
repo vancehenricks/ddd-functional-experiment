@@ -2,7 +2,8 @@ import express from 'express';
 
 import MessageResponse from '../interfaces/MessageResponse';
 import emojis from './emojis';
-import listUsers from './listUsers';
+import getUsers from './getUsers';
+import getUser from './getUser';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.get<{}, MessageResponse>('/', (req, res) => {
 });
 
 router.use('/emojis', emojis);
-router.use('/list-users', listUsers);
+router.use('/users', getUsers);
+router.use('/user', getUser);
 
 export default router;
