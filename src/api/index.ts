@@ -7,7 +7,7 @@ import getUser from './getUser';
 
 const router = express.Router();
 
-router.get<{}, MessageResponse>('/', (req, res) => {
+router.get<{}, MessageResponse>('/', (_req, res) => {
   res.json({
     message: 'API - 👋🌎🌍🌏',
   });
