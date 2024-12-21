@@ -13,8 +13,8 @@ router.get<GetUser, User>('/:id', validateUserId(), async (req, res) => {
 
   const id = req.params.id;
 
-  const users = await rowsToUser(id);
-  return res.json(users);
+  const user = await rowsToUser(id);
+  return res.json(user);
 });
 
 export default router;
