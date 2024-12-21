@@ -1,15 +1,13 @@
 import express from 'express';
+import { Request, Response } from 'express';
 import { User } from '../domain/User';
-import { getUsers } from '../service/user/getUsers';
-import { userRepository } from '../repository/user';
+import { getUsers } from './middleware/getUsers';
 
 const router = express.Router();
 
-router.get<{}, Array<User>>('/', async (_req, res) => {
-
-  const users = await getUsers(userRepository);
-
-  return res.json(users);
-});
+router.get<{}, Array<User>>('/', 
+  getUsers, (_req: Request, res : Response) => {
+    return res.json(res.locals.users);
+  });
 
 export default router;
