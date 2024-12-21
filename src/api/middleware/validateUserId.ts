@@ -2,7 +2,7 @@ import { param, validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
 
 
-export async function validateUserIdResults(req: Request, res: Response, next: NextFunction) {
+async function validateUserIdResults(req: Request, res: Response, next: NextFunction) {
   const result = validationResult(req);
 
   if (!result.isEmpty()) {
@@ -12,7 +12,7 @@ export async function validateUserIdResults(req: Request, res: Response, next: N
   next();
 }
 
-export function validateUserId() : any {
+export function validateUserId() {
   return [param('id').isNumeric(), validateUserIdResults];
 }
 

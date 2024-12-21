@@ -16,5 +16,6 @@ router.get<{}, MessageResponse>('/', (_req, res) => {
 router.use('/emojis', emojis);
 router.use('/users', getUsers);
 router.use('/user', getUser);
+//router.use('add-user', addUser);
 
 export default router;
