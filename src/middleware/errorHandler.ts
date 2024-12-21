@@ -1,6 +1,6 @@
 import ErrorResponse from '../interfaces/ErrorResponse';
-import { Request, Response, NextFunction } from 'express';
-export function errorHandler(err: Error, req: Request, res: Response<ErrorResponse>, next: NextFunction) {
+import { Request, Response } from 'express';
+export function errorHandler(err: Error, req: Request, res: Response<ErrorResponse>) {
   const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
   res.status(statusCode);
   res.json({
