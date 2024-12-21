@@ -10,7 +10,7 @@ const router = express.Router();
 router.get<GetUserQueryParam, User>('/:id', 
   validateUserId(),
   getUserById,
-  userExist, (_req, res) => {
+  userExist(), (_req, res) => {
     return res.json(res.locals.user);
   });
 

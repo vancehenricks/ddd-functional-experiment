@@ -1,1 +1,1 @@
-export type SqlFileName = 'getUserById.sql' | 'getUsers.sql';
+export type SqlFileName = 'getUserById.sql' | 'getUsers.sql' | 'addUser.sql';

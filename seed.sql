@@ -5,7 +5,7 @@ CREATE DATABASE miniblogsitedb;
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password TEXT NOT NULL,
     display_name VARCHAR(50) UNIQUE NOT NULL,
     description VARCHAR(200) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
