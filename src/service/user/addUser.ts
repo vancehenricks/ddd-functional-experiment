@@ -13,5 +13,7 @@ export async function addUser(userRepository: UserRepository, user: UserRegistra
     password: hashedPassword,
   };
 
+
+  //todo encrypt id when there is something returned here
   return userRepository.addUser(userWithHashedPassword);
 }

@@ -1,3 +1,5 @@
+import { EncryptedId } from './EncryptedId';
+
 export interface GetUserQueryParam {
-  id: number;
+  id: EncryptedId;
 }
