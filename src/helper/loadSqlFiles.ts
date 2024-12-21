@@ -1,10 +1,11 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { SqlFileName } from '../interfaces/SqlFileName';
 
-type SQLFileMap = Record<string, string>;
+type SQLFileMap = Record<SqlFileName, string>;
 
 async function loadSqlFiles(directoryPath: string): Promise<SQLFileMap> {
-  const sqlFiles: SQLFileMap = {};
+  const sqlFiles: SQLFileMap = {} as SQLFileMap;
   
   console.log('Loading sql files');
   
@@ -15,7 +16,7 @@ async function loadSqlFiles(directoryPath: string): Promise<SQLFileMap> {
       if (path.extname(file) === '.sql') {
         const filePath = path.join(directoryPath, file);
         const sqlContent = await fs.readFile(filePath, 'utf8');
-        sqlFiles[file] = sqlContent;
+        sqlFiles[(file as SqlFileName)] = sqlContent;
       }
     }
   } catch (error: any) {

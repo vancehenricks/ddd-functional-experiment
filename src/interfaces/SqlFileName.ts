@@ -1,0 +1,1 @@
+export type SqlFileName = 'getUserById.sql' | 'getUsers.sql';
