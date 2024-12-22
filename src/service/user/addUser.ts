@@ -1,15 +1,15 @@
 import { UserRegistration } from '../../domain/UserRegistration';
 import { UserRepository } from '../../interfaces/UserRepository';
 import { User } from '../../domain/User';
-import bcrypt from 'bcrypt';
+import { UserRegistrationUnHashed } from '../../interfaces/UserRegistrationUnHashed';
+import { convertToHashPassword } from '../../helper/hashedPassword/convertToHashPassword';
 
-const SALT_ROUNDS = 10;
 
-export async function addUser(userRepository: UserRepository, user: UserRegistration): Promise<User | null> {
-  const hashedPassword = await bcrypt.hash(user.password, SALT_ROUNDS);
+export async function addUser(userRepository: UserRepository, newUser: UserRegistrationUnHashed): Promise<User | null> {
+  const hashedPassword = await convertToHashPassword(newUser.password);
 
   const userWithHashedPassword: UserRegistration = {
-    ...user,
+    ...newUser,
     password: hashedPassword,
   };
 
