@@ -1,10 +1,19 @@
-import { User } from '../../domain/User';
+import { convertToUser } from '../../helper/db/convertToUser';
 import { convertToUserId } from '../../helper/encryption/convertToUserId';
-import { EncryptedUserId } from '../../interfaces/EncryptedUserId';
-import { UserRepository } from '../../interfaces/UserRepository';
+import { convertToEncryptedUser } from '../../helper/user/convertToEncryptedUser';
+import { EncryptedUser } from '../../interfaces/api/EncryptedUser';
+import { EncryptedUserId } from '../../interfaces/api/EncryptedUserId';
+import { UserRepository } from '../../interfaces/db/UserRepository';
 
 
-export async function getUserById(userRepository: UserRepository, encryptedUserId: EncryptedUserId): Promise<User | null> {
-  const id = await convertToUserId(encryptedUserId); 
-  return userRepository.getUserById(id);
+export async function getUserById(userRepository: UserRepository, encryptedUserId: EncryptedUserId): Promise<EncryptedUser | null> {
+  const userId = await convertToUserId(encryptedUserId); 
+
+  const userRecord = await userRepository.getUserById(userId);
+
+  if (!userRecord) {
+    return null;
+  }
+
+  return convertToEncryptedUser(convertToUser(userRecord));
 }

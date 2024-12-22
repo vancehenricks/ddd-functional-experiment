@@ -1,19 +1,21 @@
-import { UserRegistration } from '../../domain/UserRegistration';
-import { UserRepository } from '../../interfaces/UserRepository';
-import { User } from '../../domain/User';
-import { UserRegistrationUnHashed } from '../../interfaces/UserRegistrationUnHashed';
-import { convertToHashPassword } from '../../helper/hashedPassword/convertToHashPassword';
+import { UserRepository } from '../../interfaces/db/UserRepository';
+import { UserRegistrationUnHashed } from '../../interfaces/api/UserRegistrationUnHashed';
+import { EncryptedUser } from '../../interfaces/api/EncryptedUser';
+import { convertToEncryptedUser } from '../../helper/user/convertToEncryptedUser';
+import { convertToUserRegistration } from '../../helper/user/convertToUserRegistration';
+import { convertToUser } from '../../helper/db/convertToUser';
 
 
-export async function addUser(userRepository: UserRepository, newUser: UserRegistrationUnHashed): Promise<User | null> {
-  const hashedPassword = await convertToHashPassword(newUser.password);
+export async function addUser(userRepository: UserRepository, newUser: UserRegistrationUnHashed): Promise<EncryptedUser | null> {
 
-  const userWithHashedPassword: UserRegistration = {
-    ...newUser,
-    password: hashedPassword,
-  };
+  const userRegistration = await convertToUserRegistration(newUser);
+  const userRecord = await userRepository.addUser(userRegistration);
 
+  if (!userRecord) {
+    return null;
+  }
 
-  //todo encrypt id when there is something returned here
-  return userRepository.addUser(userWithHashedPassword);
+  const user = convertToUser(userRecord);
+  
+  return convertToEncryptedUser(user);
 }

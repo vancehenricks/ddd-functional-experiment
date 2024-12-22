@@ -3,6 +3,6 @@ import { User } from './User';
 
 export type HashedPassword = Brand<string, 'HashedPassword'>;
 
-export interface UserRegistration extends Omit<User, 'user_id' | 'description'> {
+export interface UserRegistration extends Omit<User, 'userId' | 'description'> {
   password: HashedPassword;
 }

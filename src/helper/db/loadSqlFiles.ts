@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { SqlFileName } from '../interfaces/SqlFileName';
+import { SqlFileName } from '../../interfaces/db/SqlFileName';
 
 type SQLFileMap = Record<SqlFileName, string>;
 
@@ -26,6 +26,6 @@ async function loadSqlFiles(directoryPath: string): Promise<SQLFileMap> {
   return sqlFiles;
 }
 
-const directoryPath = path.resolve(__dirname, '../sql');
+const directoryPath = path.resolve(__dirname, '../../sql');
 
 export const LOAD_SQL_FILES = (async () => loadSqlFiles(directoryPath))();

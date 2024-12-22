@@ -3,7 +3,7 @@ import { User } from '../domain/User';
 import { validateUserId } from './middleware/validateUserId';
 import { userExist } from './middleware/userExist';
 import { getUserById } from './middleware/getUserById';
-import { GetUserQueryParam } from '../interfaces/GetUserQueryParam';
+import { GetUserQueryParam } from '../interfaces/api/GetUserQueryParam';
 
 const router = express.Router();
 

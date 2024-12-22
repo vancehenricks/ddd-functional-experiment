@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
-import { GetUserQueryParam } from '../../interfaces/GetUserQueryParam';
+import { GetUserQueryParam } from '../../interfaces/api/GetUserQueryParam';
 import { getParam } from '../../helper/express/getParam';
 import { BAD_REQUEST } from '../../config/httpStatus';
 
@@ -16,6 +16,6 @@ async function validateUserIdResults(req: Request, res: Response, next: NextFunc
 }
 
 export function validateUserId(): any {
-  return [getParam<GetUserQueryParam>('id').isNumeric(), validateUserIdResults];
+  return [getParam<GetUserQueryParam>('id').isString(), validateUserIdResults];
 }
 

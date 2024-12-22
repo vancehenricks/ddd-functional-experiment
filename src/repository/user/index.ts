@@ -1,7 +1,7 @@
-import { UserRepository } from '../../interfaces/UserRepository';
+import { UserRepository } from '../../interfaces/db/UserRepository';
 import { addUser } from './addUser';
-import { getUsers } from './getUserId';
-import { getUserById } from './getUsers';
+import { getUserById } from './getUserById';
+import { getUsers } from './getUsers';
 
 export const userRepository: UserRepository = {
   getUsers,

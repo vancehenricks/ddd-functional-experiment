@@ -2,7 +2,7 @@ import express from 'express';
 import { validateNewUser } from './middleware/validateNewUser';
 import { addUser } from './middleware/addUser';
 import { userExist } from './middleware/userExist';
-import { UserRegistrationUnHashed } from '../interfaces/UserRegistrationUnHashed';
+import { UserRegistrationUnHashed } from '../interfaces/api/UserRegistrationUnHashed';
 
 const router = express.Router();
 

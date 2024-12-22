@@ -1,10 +1,10 @@
 import { UserId } from '../../domain/User';
-import { EncryptedUserId } from '../../interfaces/EncryptedUserId';
-import { decryptFixedSalt } from './decryptFixedSalt';
+import { EncryptedUserId } from '../../interfaces/api/EncryptedUserId';
+import { decryptFixed } from './decryptFixed';
 
 export async function convertToUserId(encryptedUserId: EncryptedUserId): Promise<UserId> {
 
-  const userId = await decryptFixedSalt(encryptedUserId);
+  const userId = await decryptFixed(encryptedUserId);
 
-  return userId as UserId;
+  return Number(userId) as UserId;
 }
