@@ -2,14 +2,24 @@ CREATE DATABASE miniblogsitedb;
 
 \c miniblogsitedb
 
+CREATE TABLE roles (
+    role_id INT GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    PRIMARY KEY (role_id)
+);
+
 CREATE TABLE users (
     user_id INT GENERATED ALWAYS AS IDENTITY,
+    role_id INT,
     username VARCHAR(50) UNIQUE NOT NULL,
     password TEXT NOT NULL,
     display_name VARCHAR(50) UNIQUE NOT NULL,
     description VARCHAR(200) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    PRIMARY KEY (user_id)
+    PRIMARY KEY (user_id),
+    CONSTRAINT fk_roles
+    FOREIGN KEY (role_id)
+    REFERENCES roles (role_id)
 );
 
 CREATE TABLE posts (
@@ -38,31 +48,54 @@ CREATE TABLE likes (
     ON DELETE CASCADE
 );
 
+-- Insert dummy data into the roles table
+INSERT INTO roles (name) VALUES
+('user'),
+('admin');
 
 -- Insert dummy data into the users table
-INSERT INTO users (username, password, display_name, description, email) VALUES
+INSERT INTO users (
+    username, password, display_name, description, email, role_id
+) VALUES
 (
     'johndoe',
     'password123',
     'John Doe',
     'Software developer',
-    'johndoe@example.com'
+    'johndoe@example.com',
+    1
 ),
 (
     'janedoe',
     'password456',
     'Jane Doe',
     'Graphic designer',
-    'janedoe@example.com'
+    'janedoe@example.com',
+    1
 ),
-('alice', 'password789', 'Alice Smith', 'Content writer', 'alice@example.com'),
-('bob', 'password000', 'Bob Brown', 'Marketing specialist', 'bob@example.com'),
+(
+    'alice',
+    'password789',
+    'Alice Smith',
+    'Content writer',
+    'alice@example.com',
+    1
+),
+(
+    'bob',
+    'password000',
+    'Bob Brown',
+    'Marketing specialist',
+    'bob@example.com',
+    1
+),
 (
     'charlie',
     'password111',
     'Charlie Black',
     'Project manager',
-    'charlie@example.com'
+    'charlie@example.com',
+    2
 );
 
 -- Insert dummy data into the posts table
