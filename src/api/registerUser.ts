@@ -1,12 +1,12 @@
 import express from 'express';
 import { validateNewUser } from './middleware/validateNewUser';
-import { UserRegistration } from '../domain/UserRegistration';
 import { addUser } from './middleware/addUser';
 import { userExist } from './middleware/userExist';
+import { UserRegistrationUnHashed } from '../interfaces/UserRegistrationUnHashed';
 
 const router = express.Router();
 
-router.post<UserRegistration>('/', 
+router.post<UserRegistrationUnHashed>('/', 
   validateNewUser(),
   addUser,
   userExist(),
