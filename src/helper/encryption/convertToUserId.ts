@@ -1,10 +1,14 @@
 import { UserId } from '../../domain/User';
 import { EncryptedUserId } from '../../interfaces/api/EncryptedUserId';
-import { decryptFixed } from './decryptFixed';
+import { deObfuscate } from './obfuscate';
 
-export async function convertToUserId(encryptedUserId: EncryptedUserId): Promise<UserId> {
+export async function convertToUserId(encryptedUserId: EncryptedUserId): Promise<UserId | null> {
 
-  const userId = await decryptFixed(encryptedUserId);
+  try {
+    const userId = await deObfuscate(encryptedUserId);
+    return Number(userId) as UserId;
+  } catch (error) {
+    return null;
+  }
 
-  return Number(userId) as UserId;
 }

@@ -1,9 +1,9 @@
 import { UserId } from '../../domain/User';
 import { EncryptedUserId } from '../../interfaces/api/EncryptedUserId';
-import { encryptFixed } from './encryptFixed';
+import { obfuscate } from './obfuscate';
 
 export async function convertToEncryptedUserId(userId: UserId): Promise<EncryptedUserId> {
 
-  const encryptedUserId = await encryptFixed(userId.toString());
+  const encryptedUserId = await obfuscate(userId.toString());
   return encryptedUserId as EncryptedUserId;
 }

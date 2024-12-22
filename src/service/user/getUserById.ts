@@ -9,11 +9,15 @@ import { UserRepository } from '../../interfaces/db/UserRepository';
 export async function getUserById(userRepository: UserRepository, encryptedUserId: EncryptedUserId): Promise<EncryptedUser | null> {
   const userId = await convertToUserId(encryptedUserId); 
 
+  if (!userId) {
+    return null;
+  }
+
   const userRecord = await userRepository.getUserById(userId);
 
   if (!userRecord) {
     return null;
   }
 
-  return convertToEncryptedUser(convertToUser(userRecord));
+  return convertToEncryptedUser(convertToUser(userRecord), encryptedUserId);
 }
