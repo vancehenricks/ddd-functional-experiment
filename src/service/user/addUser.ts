@@ -1,9 +1,9 @@
-import { UserRepository } from '../../interfaces/db/UserRepository';
-import { UserRegistrationUnHashed } from '../../interfaces/api/UserRegistrationUnHashed';
-import { EncryptedUser } from '../../interfaces/api/EncryptedUser';
-import { convertToEncryptedUser } from '../../helper/user/convertToEncryptedUser';
-import { convertToUserRegistration } from '../../helper/user/convertToUserRegistration';
-import { convertToUser } from '../../helper/db/convertToUser';
+
+import { convertToEncryptedUser } from '../../util/user/convertToEncryptedUser';
+import { convertToUserRegistration } from '../../util/user/convertToUserRegistration';
+import { convertToUser } from '../../util/db/convertToUser';
+import { UserRegistrationUnHashed, EncryptedUser } from '../../interfaces/api';
+import { UserRepository } from '../../interfaces/repository';
 
 
 export async function addUser(userRepository: UserRepository, newUser: UserRegistrationUnHashed): Promise<EncryptedUser | null> {

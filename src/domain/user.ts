@@ -1,4 +1,4 @@
-import { Brand } from '../interfaces/Brand';
+import { Brand } from '../interfaces/util';
 
 export type UserId = Brand<number, 'UserId'>;
 export type Username = Brand<string, 'Username'>;
@@ -13,4 +13,10 @@ export interface User {
   displayName: DisplayName;
   description: Description;
   email: Email;
+}
+
+export type HashedPassword = Brand<string, 'HashedPassword'>;
+
+export interface UserRegistration extends Omit<User, 'userId' | 'description'> {
+  password: HashedPassword;
 }

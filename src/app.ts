@@ -4,10 +4,10 @@ import helmet from 'helmet';
 import cors from 'cors';
 
 import api from './api';
-import MessageResponse from './interfaces/MessageResponse';
 import dotenv from 'dotenv';
 import { errorHandler } from './middleware/errorHandler';
 import { notFound } from './middleware/notFound';
+import { MessageResponse } from './interfaces/util';
 
 dotenv.config();
 

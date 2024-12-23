@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { SqlFileName } from '../../interfaces/db/SqlFileName';
+
+type SqlFileName = 'getUserById.sql' | 'getUsers.sql' | 'addUser.sql';
 
 type SQLFileMap = Record<SqlFileName, string>;
 

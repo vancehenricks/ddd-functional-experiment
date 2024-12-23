@@ -1,5 +1,5 @@
-import { User } from '../../domain/User';
-import { UserRecord } from '../../interfaces/db/UserRecord';
+import { User } from '../../domain/user';
+import { UserRecord } from '../../interfaces/repository';
 
 export function convertToUser(userRecord: UserRecord) : User {
   return {

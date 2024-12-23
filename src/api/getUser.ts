@@ -1,9 +1,9 @@
 import express from 'express';
-import { User } from '../domain/User';
+import { User } from '../domain/user';
 import { validateUserId } from './middleware/validateUserId';
 import { userExist } from './middleware/userExist';
 import { getUserById } from './middleware/getUserById';
-import { GetUserQueryParam } from '../interfaces/api/GetUserQueryParam';
+import { GetUserQueryParam } from '../interfaces/api';
 
 const router = express.Router();
 

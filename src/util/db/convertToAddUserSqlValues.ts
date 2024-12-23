@@ -1,4 +1,4 @@
-import { UserRegistration } from '../../domain/UserRegistration';
+import { UserRegistration } from '../../domain/user';
 
 
 export function convertToAddUserSqlValues(user: UserRegistration) {

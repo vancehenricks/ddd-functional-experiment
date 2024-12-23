@@ -1,7 +1,7 @@
-import { convertToUser } from '../../helper/db/convertToUser';
-import { convertToEncryptedUser } from '../../helper/user/convertToEncryptedUser';
-import { EncryptedUser } from '../../interfaces/api/EncryptedUser';
-import { UserRepository } from '../../interfaces/db/UserRepository';
+import { EncryptedUser } from '../../interfaces/api';
+import { UserRepository } from '../../interfaces/repository';
+import { convertToUser } from '../../util/db/convertToUser';
+import { convertToEncryptedUser } from '../../util/user/convertToEncryptedUser';
 
 export async function getUsers(userRepository: UserRepository) : Promise<Array<EncryptedUser>> {
 

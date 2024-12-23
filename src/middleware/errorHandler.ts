@@ -1,5 +1,5 @@
-import ErrorResponse from '../interfaces/ErrorResponse';
 import { Request, Response } from 'express';
+import { ErrorResponse } from '../interfaces/util';
 export function errorHandler(err: Error, req: Request, res: Response<ErrorResponse>) {
   const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
   res.status(statusCode);

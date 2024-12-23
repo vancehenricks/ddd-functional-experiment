@@ -1,8 +1,8 @@
 import { pool } from '../../config/database';
-import { UserRegistration } from '../../domain/UserRegistration';
-import { convertToAddUserSqlValues } from '../../helper/db/convertToAddUserSqlValues';
-import { LOAD_SQL_FILES } from '../../helper/db/loadSqlFiles';
-import { UserRecord } from '../../interfaces/db/UserRecord';
+import { UserRegistration } from '../../domain/user';
+import { UserRecord } from '../../interfaces/repository';
+import { convertToAddUserSqlValues } from '../../util/db/convertToAddUserSqlValues';
+import { LOAD_SQL_FILES } from '../../util/db/loadSqlFiles';
 
 const UNIQUE_VIOLATION = '23505';
 

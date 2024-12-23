@@ -1,6 +1,6 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import { User } from '../domain/User';
+import { User } from '../domain/user';
 import { getUsers } from './middleware/getUsers';
 
 const router = express.Router();

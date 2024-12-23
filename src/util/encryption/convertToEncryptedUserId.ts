@@ -1,5 +1,5 @@
-import { UserId } from '../../domain/User';
-import { EncryptedUserId } from '../../interfaces/api/EncryptedUserId';
+import { UserId } from '../../domain/user';
+import { EncryptedUserId } from '../../interfaces/api';
 import { obfuscate } from './obfuscate';
 
 export async function convertToEncryptedUserId(userId: UserId): Promise<EncryptedUserId> {

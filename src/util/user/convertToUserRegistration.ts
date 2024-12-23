@@ -1,5 +1,6 @@
-import { UserRegistration } from '../../domain/UserRegistration';
-import { UserRegistrationUnHashed } from '../../interfaces/api/UserRegistrationUnHashed';
+
+import { UserRegistration } from '../../domain/user';
+import { UserRegistrationUnHashed } from '../../interfaces/api';
 import { convertToHashPassword } from '../encryption/convertToHashPassword';
 
 export async function convertToUserRegistration(userRegistrationUnHashed: UserRegistrationUnHashed) {

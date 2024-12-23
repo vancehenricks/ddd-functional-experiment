@@ -1,4 +1,4 @@
-import { UserRepository } from '../../interfaces/db/UserRepository';
+import { UserRepository } from '../../interfaces/repository';
 import { addUser } from './addUser';
 import { getUserById } from './getUserById';
 import { getUsers } from './getUsers';
