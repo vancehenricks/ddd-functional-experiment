@@ -8,7 +8,7 @@ type SQLFileMap = Record<SqlFileName, string>;
 async function loadSqlFiles(directoryPath: string): Promise<SQLFileMap> {
   const sqlFiles: SQLFileMap = {} as SQLFileMap;
   
-  console.log('Loading sql files');
+  console.log(`Loading SQL files from: ${directoryPath}`);
   
   try {
     const files = await fs.readdir(directoryPath);
@@ -20,8 +20,8 @@ async function loadSqlFiles(directoryPath: string): Promise<SQLFileMap> {
         sqlFiles[(file as SqlFileName)] = sqlContent;
       }
     }
-  } catch (error: any) {
-    console.error(`Error loading SQL files: ${error.message}`);
+  } catch (error) {
+    throw error;
   }
   
   return sqlFiles;

@@ -1,9 +1,9 @@
 import { validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
 import { getParam } from '../../util/api/getParam';
-import { BAD_REQUEST } from '../../config/httpStatus';
 import { GetUserQueryParam } from '../../interfaces/api';
 import { setStatus } from '../../util/api/setStatus';
+import { BAD_REQUEST } from '../../config/httpStatus';
 
 
 async function validateUserIdResults(req: Request, res: Response, next: NextFunction) {
