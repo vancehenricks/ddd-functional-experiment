@@ -1,8 +1,8 @@
 import { POOL } from '../../config/database';
 import { UserRegistration } from '../../domain/user';
 import { UserRecord } from '../../interfaces/repository';
-import { convertToUserRecordTuple } from '../../util/db/convertToUserRecordTuple';
-import { LOAD_SQL_FILES } from '../../util/db/loadSqlFiles';
+import { convertToUserRecordTuple } from '../../util/repository/convertToUserRecordTuple';
+import { LOAD_SQL_FILES } from '../../util/repository/loadSqlFiles';
 
 const UNIQUE_VIOLATION = '23505';
 

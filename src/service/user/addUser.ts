@@ -1,7 +1,7 @@
 
 import { convertToEncryptedUser } from '../../util/user/convertToEncryptedUser';
 import { convertToUserRegistration } from '../../util/user/convertToUserRegistration';
-import { convertToUser } from '../../util/db/convertToUser';
+import { convertToUser } from '../../util/repository/convertToUser';
 import { UserRegistrationUnHashed, EncryptedUser } from '../../interfaces/api';
 import { UserRepository } from '../../interfaces/repository';
 

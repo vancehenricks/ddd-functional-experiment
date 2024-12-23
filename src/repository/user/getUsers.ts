@@ -1,4 +1,4 @@
-import { LOAD_SQL_FILES } from '../../util/db/loadSqlFiles';
+import { LOAD_SQL_FILES } from '../../util/repository/loadSqlFiles';
 import { POOL } from '../../config/database';
 import { UserRecord } from '../../interfaces/repository';
 
