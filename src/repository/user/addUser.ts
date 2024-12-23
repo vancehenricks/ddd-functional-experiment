@@ -18,6 +18,6 @@ export async function addUser(user: UserRegistration): Promise<UserRecord | null
     if ((error as any).code === UNIQUE_VIOLATION) {
       return null;
     }
-    throw error; // Something is seriously wrong better crash the app
+    throw new Error('An error occurred while adding a new user', { cause : error });
   }
 }

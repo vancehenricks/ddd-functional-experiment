@@ -21,7 +21,7 @@ async function loadSqlFiles(directoryPath: string): Promise<SQLFileMap> {
       }
     }
   } catch (error) {
-    throw error;
+    throw new Error('Failed to load SQL files', { cause : error });
   }
   
   return sqlFiles;
