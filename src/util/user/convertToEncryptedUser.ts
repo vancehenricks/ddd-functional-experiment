@@ -4,7 +4,6 @@ import { convertToEncryptedUserId } from '../encryption/convertToEncryptedUserId
 
 export async function convertToEncryptedUser(user: User, preEncryptedUserId?: EncryptedUserId): Promise<EncryptedUser> {
 
-
   const encryptedId = preEncryptedUserId ?? await convertToEncryptedUserId(user.userId);
 
   const encryptedUserId : EncryptedUser = {

@@ -4,6 +4,10 @@ import { deObfuscate } from './obfuscate';
 
 export async function convertToUserId(encryptedUserId: EncryptedUserId): Promise<UserId | null> {
 
+  if (!encryptedUserId) {
+    return null;
+  }
+
   const userId = await deObfuscate(encryptedUserId);
 
   if (!userId) {
