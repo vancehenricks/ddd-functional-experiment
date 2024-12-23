@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import api from './api/controller';
+import api from './api';
 import dotenv from 'dotenv';
 import { errorHandler } from './middleware/errorHandler';
 import { notFound } from './middleware/notFound';

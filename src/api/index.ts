@@ -1,9 +1,9 @@
 import express from 'express';
 
-import getUsers from './getUsers';
-import getUser from './getUser';
-import registerUser from './registerUser';
-import { MessageResponse } from '../../interfaces/util';
+import getUsers from './controller/getUsers';
+import getUser from './controller/getUser';
+import registerUser from './controller/registerUser';
+import { MessageResponse } from '../interfaces/util';
 
 const router = express.Router();
 
