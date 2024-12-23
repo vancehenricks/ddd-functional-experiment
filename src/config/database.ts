@@ -58,12 +58,6 @@ export const REDIS_STORE = new RedisStore({
 });
 
 export function createSession() {
-  const {
-  } = process.env;
-  
-  if (!REDIS_SECRET_KEY) {
-    throw new Error('REDIS_SECRET_KEY is not defined');
-  }
 
   return session({
     store: REDIS_STORE,
