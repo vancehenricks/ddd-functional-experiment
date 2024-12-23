@@ -1,17 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
-import { getBody } from '../../util/express/getBody';
+import { getBody } from '../../util/api/getBody';
 import { validationResult } from 'express-validator';
 import { BAD_REQUEST } from '../../config/httpStatus';
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '../../config/password';
 import { MAX_DISPLAY_NAME_LENGTH, MIN_DISPLAY_NAME_LENGTH } from '../../config/displayName';
 import { MAX_USERNAME_LENGTH, MIN_USERNAME_LENGTH } from '../../config/username';
 import { UserRegistrationUnHashed } from '../../interfaces/api';
+import { setStatus } from '../../util/api/setStatus';
 
 function validateNewUserResults(req: Request, res: Response, next: NextFunction) {
   const result = validationResult(req);
 
   if (!result.isEmpty()) {
-    return res.status(BAD_REQUEST).json({ errors: result.array() });
+    return setStatus(res, BAD_REQUEST).json({ errors: result.array() });
   }
 
   next();

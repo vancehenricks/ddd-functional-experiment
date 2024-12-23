@@ -16,3 +16,5 @@ export type UnHashedPassword = Brand<string, 'UnHashedPassword'>;
 export interface UserRegistrationUnHashed extends Omit<User, 'userId' | 'description'> {
   password: UnHashedPassword;
 }
+
+export type HttpStatus = 200 | 400 | 403 | 404 | 500;
