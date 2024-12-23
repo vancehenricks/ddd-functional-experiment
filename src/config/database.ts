@@ -14,6 +14,8 @@ const {
   POSTGRES_PW,
   POSTGRES_PORT,
   REDIS_PASSWORD,
+  REDIS_PORT,
+  REDIS_HOST,
 } = process.env;
 
 function createPool() {
@@ -50,23 +52,45 @@ function createPool() {
 export const POOL = (() => createPool())();
 
 function createRedisClient() {
-  const client = createClient();
+
+  if (!REDIS_HOST) {
+    throw new Error('REDIS_HOST is not defined');
+  }
+
+  if (!REDIS_PORT) {
+    throw new Error('REDIS_PORT is not defined');
+  }
+
+  if (!REDIS_PASSWORD) {
+    throw new Error('REDIS_PASSWORD is not defined');
+  }
+
+  const client = createClient({
+    socket: {
+      host: REDIS_HOST,
+      port: Number(REDIS_PORT),
+    },
+    username: REDIS_HOST,
+    password: REDIS_PASSWORD,
+  });
   client.connect().catch(console.error);
   return client;
 }
 
 export const REDIS_CLIENT = (() => createRedisClient())();
 
+const PREFIX = 'miniblogsite:';
+
 export const REDIS_STORE = new RedisStore({
   client: REDIS_CLIENT,
-  prefix: 'miniblogsite:',
+  prefix: PREFIX,
 });
 
 export function createSession() {
   const {
   } = process.env;
   
-  if (REDIS_PASSWORD) {
+  if (!REDIS_PASSWORD) {
     throw new Error('REDIS_PASSWORD is not defined');
   }
 

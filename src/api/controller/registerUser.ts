@@ -1,8 +1,8 @@
 import express from 'express';
-import { validateNewUser } from './middleware/validateNewUser';
-import { addUser } from './middleware/addUser';
-import { userExist } from './middleware/userExist';
-import { UserRegistrationUnHashed } from '../interfaces/api';
+import { UserRegistrationUnHashed } from '../../interfaces/api';
+import { userExist } from '../middleware/userExist';
+import { addUser } from '../middleware/addUser';
+import { validateNewUser } from '../middleware/validateNewUser';
 
 const router = express.Router();
 
