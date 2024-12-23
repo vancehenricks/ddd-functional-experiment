@@ -1,4 +1,4 @@
-import { pool } from '../../config/database';
+import { POOL } from '../../config/database';
 import { UserRegistration } from '../../domain/user';
 import { UserRecord } from '../../interfaces/repository';
 import { convertToUserRecordTuple } from '../../util/db/convertToUserRecordTuple';
@@ -11,7 +11,7 @@ export async function addUser(user: UserRegistration): Promise<UserRecord | null
   const sql = sqlFiles['addUser.sql'];
 
   try {
-    const result = await pool.query(sql, convertToUserRecordTuple(user));
+    const result = await POOL.query(sql, convertToUserRecordTuple(user));
 
     return result.rows[0];
   } catch (error) {

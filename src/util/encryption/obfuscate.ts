@@ -15,8 +15,10 @@ const OUTPUT_ENCODING: BufferEncoding = 'hex';
 const INPUT_ENCODING: BufferEncoding = 'utf8';
 
 
-function preDefinedSaltIsNotDefinedError() {
-  return new Error('PREDEFINED_SALT is not defined');
+function throwPreDefinedSaltNotDefined() {
+  if (!PREDEFINED_SALT) {
+    throw new Error('PREDEFINED_SALT is not defined');
+  }
 }
 
 async function createKey() {
@@ -24,45 +26,49 @@ async function createKey() {
     throw new Error('OBFUSCATE_PASSWORD is not defined');
   }
 
-  if (!PREDEFINED_SALT) {
-    throw preDefinedSaltIsNotDefinedError();
-  }
+  throwPreDefinedSaltNotDefined();
 
   return await scrypt(OBFUSCATE_PASSWORD, PREDEFINED_SALT, ALGORITHM_LENGTH) as Buffer;
 }
 
 const CACHED_KEY = (async () => createKey())();
 
-export async function obfuscate(text: string): Promise<string> {
+export async function obfuscate(text: string): Promise<string | null> {
   const key = await CACHED_KEY;
 
   if (!PREDEFINED_SALT) {
     throw new Error('PREDEFINED_SALT is not defined');
   }
 
-  const iv = Buffer.from(PREDEFINED_SALT, INPUT_ENCODING);
+  try {  
+    const iv = Buffer.from(PREDEFINED_SALT, INPUT_ENCODING);
 
-  const cipher = createCipheriv(ALGORITHM, key, iv);
-  let encrypted = cipher.update(text, INPUT_ENCODING, OUTPUT_ENCODING);
-  encrypted += cipher.final(OUTPUT_ENCODING);
+    const cipher = createCipheriv(ALGORITHM, key, iv);
+    let encrypted = cipher.update(text, INPUT_ENCODING, OUTPUT_ENCODING);
+    encrypted += cipher.final(OUTPUT_ENCODING);
+    return encrypted;
 
-  return encrypted;
+  } catch (error) {
+    return null;
+  }
 }
 
-export async function deObfuscate(encrypted: string): Promise<string> {
+export async function deObfuscate(encrypted: string): Promise<string | null> {
   const key = await CACHED_KEY;
 
-  if (!PREDEFINED_SALT) {
-    throw preDefinedSaltIsNotDefinedError();
+  throwPreDefinedSaltNotDefined();
+
+  try {  
+    const iv = Buffer.from(PREDEFINED_SALT, INPUT_ENCODING);
+
+    const decipher = createDecipheriv(ALGORITHM, key, iv);
+
+    let decrypted = decipher.update(encrypted, OUTPUT_ENCODING, INPUT_ENCODING);
+    decrypted += decipher.final(INPUT_ENCODING);
+
+    return decrypted;
+  } catch (error) {
+    return null;
   }
-
-  const iv = Buffer.from(PREDEFINED_SALT, INPUT_ENCODING);
-
-  const decipher = createDecipheriv(ALGORITHM, key, iv);
-
-  let decrypted = decipher.update(encrypted, OUTPUT_ENCODING, INPUT_ENCODING);
-  decrypted += decipher.final(INPUT_ENCODING);
-
-  return decrypted;
 }
 

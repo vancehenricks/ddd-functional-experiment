@@ -4,11 +4,11 @@ import { deObfuscate } from './obfuscate';
 
 export async function convertToUserId(encryptedUserId: EncryptedUserId): Promise<UserId | null> {
 
-  try {
-    const userId = await deObfuscate(encryptedUserId);
-    return Number(userId) as UserId;
-  } catch (error) {
+  const userId = await deObfuscate(encryptedUserId);
+
+  if (!userId) {
     return null;
   }
 
+  return Number(userId) as UserId;
 }
