@@ -1,7 +1,7 @@
 import { pool } from '../../config/database';
 import { UserRegistration } from '../../domain/user';
 import { UserRecord } from '../../interfaces/repository';
-import { convertToAddUserSqlValues } from '../../util/db/convertToAddUserSqlValues';
+import { convertToUserRecordTuple } from '../../util/db/convertToUserRecordTuple';
 import { LOAD_SQL_FILES } from '../../util/db/loadSqlFiles';
 
 const UNIQUE_VIOLATION = '23505';
@@ -11,7 +11,7 @@ export async function addUser(user: UserRegistration): Promise<UserRecord | null
   const sql = sqlFiles['addUser.sql'];
 
   try {
-    const result = await pool.query(sql, convertToAddUserSqlValues(user));
+    const result = await pool.query(sql, convertToUserRecordTuple(user));
 
     return result.rows[0];
   } catch (error) {

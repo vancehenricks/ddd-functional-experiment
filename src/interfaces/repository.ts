@@ -9,6 +9,14 @@ export interface UserRecord {
   email: Email;
 }
 
+export type UserRecordTuple = [
+  UserRecord['username'],
+  UserRecord['password'],
+  UserRecord['display_name'],
+  UserRecord['description'],
+  UserRecord['email'],
+];
+
 export interface UserRepository {
   getUsers(): Promise<UserRecord[]>;
   getUserById(userId: UserId): Promise<UserRecord | null>;
