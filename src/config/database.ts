@@ -1,46 +1,23 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
 import { createClient } from 'redis';
 import { RedisStore } from 'connect-redis';
 import { CipherKey } from 'crypto';
 import session from 'express-session';
+import { getPostgresDb, getPostgresHost, getPostgresPassword, getPostgresPort, getPostgresUser, getRedisHost, getRedisPassword, getRedisPort, getRedisSecretKey, getRedisUser } from '../util/environment';
 
-dotenv.config();
 
-const {
-  POSTGRES_HOST,
-  POSTGRES_DB,
-  POSTGRES_USER,
-  POSTGRES_PW,
-  POSTGRES_PORT,
-  REDIS_PASSWORD,
-  REDIS_PORT,
-  REDIS_HOST,
-  REDIS_USER,
-  REDIS_SECRET_KEY,
-} = process.env;
+const POSTGRES_USER = getPostgresUser();
+const POSTGRES_PW = getPostgresPassword();
+const POSTGRES_HOST = getPostgresHost();
+const POSTGRES_PORT = getPostgresPort();
+const POSTGRES_DB = getPostgresDb();
+const REDIS_SECRET_KEY = getRedisSecretKey();
+const REDIS_USER = getRedisUser();
+const REDIS_HOST = getRedisHost();
+const REDIS_PORT = getRedisPort();
+const REDIS_PASSWORD = getRedisPassword();
 
 function createPool() {
-
-  if (!POSTGRES_HOST) {
-    throw new Error('POSTGRES_HOST is not defined');
-  }
-
-  if (!POSTGRES_DB) {
-    throw new Error('POSTGRES_DB is not defined');
-  }
-
-  if (!POSTGRES_USER) {
-    throw new Error('POSTGRES_USER is not defined');
-  }
-
-  if (!POSTGRES_PW) {
-    throw new Error('POSTGRES_PW is not defined');
-  }
-
-  if (!POSTGRES_PORT) {
-    throw new Error('POSTGRES_PORT is not defined');
-  }
 
   console.log(`Connecting to postgres://${POSTGRES_USER}:******@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}`);
 
@@ -53,25 +30,9 @@ function createPool() {
   });
 }
 
-export const POOL = (() => createPool())();
+export const POOL = createPool();
 
 function createRedisClient() {
-
-  if (!REDIS_HOST) {
-    throw new Error('REDIS_HOST is not defined');
-  }
-
-  if (!REDIS_PORT) {
-    throw new Error('REDIS_PORT is not defined');
-  }
-
-  if (!REDIS_PASSWORD) {
-    throw new Error('REDIS_PASSWORD is not defined');
-  }
-
-  if (!REDIS_USER) {
-    throw new Error('REDIS_USER is not defined');
-  }
 
   console.log(`Connecting to redis://${REDIS_USER}:******@${REDIS_HOST}:${REDIS_PORT}`);
 

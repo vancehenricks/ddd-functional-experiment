@@ -7,3 +7,5 @@ export interface ErrorResponse extends MessageResponse {
 }
 
 export type Brand<K, T> = K & { __brand: T };
+
+export type NodeEnvironment = 'development' | 'production' | 'test';
