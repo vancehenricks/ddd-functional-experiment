@@ -1,6 +1,6 @@
 # Mini Blog Site
 
-Experimenting DDD in mind while keeping it functional.
+Experimenting DDD while keeping it functional.
 
 ## Setup
 
