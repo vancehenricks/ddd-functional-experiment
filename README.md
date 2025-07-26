@@ -1,4 +1,4 @@
-# Mini Blog Site
+# ddd-functional-experiment
 
 Experimenting DDD while keeping it functional.
 
