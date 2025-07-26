@@ -1,6 +1,6 @@
 # ddd-functional-experiment
 
-Experimenting DDD while keeping it functional.
+Unfinished blog site with DDD in mind while trying to incorporate it with a functional.
 
 ## Setup
 
